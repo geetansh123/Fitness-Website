@@ -1,0 +1,30 @@
+{% extends 'users/header.html' %} {% block content %}
+<div class="container" style="border:2px solid black;border-radius: 5px;padding: 20px;">
+	
+	<h2>Login</h2>
+
+	<form method="POST">
+	{% csrf_token %}
+	{%for field in form %}
+		<p>
+			{{field.label_tag}}
+			{{field}}
+
+			{% for error in field.errors %}
+				<p style="color:red;">{{error}}</p>
+			{% endfor %}
+
+			{% if form.non_field_errors %}
+				<div style="color:red;">
+					<p>{{form.non_field_errors}}</p>
+				</div>
+			{% endif %}
+		</p>
+
+	{% endfor %}
+
+	<button type='submit'>Login</button>
+	</form>
+	</div>
+
+{% endblock %}

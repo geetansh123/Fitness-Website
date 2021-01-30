@@ -1,0 +1,101 @@
+{% load static %}
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <link
+    rel="stylesheet"
+    href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/styles/default.min.css"
+  />
+  <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/10.0.3/highlight.min.js"></script>
+  <script>
+    hljs.initHighlightingOnLoad();
+  </script>
+
+  <!-- Prism CSS -->
+  <!-- Compiled and minified CSS -->
+  <link href="{% static 'users/css/materialize.css' %}" rel="stylesheet" />
+  <!-- Compiled and minified JavaScript -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0/js/materialize.min.js"></script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/css/materialize.min.css"
+  />
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-beta/js/materialize.min.js"></script>
+
+  <link
+    href="https://fonts.googleapis.com/icon?family=Material+Icons"
+    rel="stylesheet"
+  />
+
+  <script>
+    $(document).ready(function () {
+      $(".sidenav").sidenav();
+    });
+  </script>
+</head>
+<body>
+  <div>
+    <div class="navbar-fixed">
+      <nav
+        style="
+          padding: 0px 10px;
+          background: #000;
+          border-bottom: 1px solid #fff;
+        "
+      >
+        <div class="nav-wrapper">
+          <a style="font-size: 4.2vw" href="/" class="brand-logo">Fit You!</a>
+
+          <a href="#" class="sidenav-trigger" data-target="mobile-nav">
+            <i class="material-icons">menu</i>
+          </a>
+
+          <ul class="right hide-on-med-and-down">
+            <li><a href="/">Home</a></li>
+            {% if user.is_authenticated %}
+            <li><a href="/account">{{user.user_name}}</a></li>
+            <li><a href="/logout">Logout</a></li>
+            {% else %}
+            <li><a href="/register">Register</a></li>
+            <li><a href="/login">Login</a></li>
+            {% endif %}
+            <li><a href="/about">About</a></li>
+          </ul>
+        </div>
+      </nav>
+    </div>
+
+    <ul class="sidenav" id="mobile-nav">
+      <li><a href="/">Home</a></li>
+      {% if user.is_authenticated %}
+      <li><a href="/account">{{user.user_name}}</a></li>
+      <li><a href="/logout">Logout</a></li>
+      {% else %}
+      <li><a href="/register">Register</a></li>
+      <li><a href="/login">Login</a></li>
+      {% endif %}
+      <li><a href="/about">About</a></li>
+    </ul>
+    <br />
+    {% if messages %} {% for message in messages %}
+    <script>
+      M.toast({
+        html: "{{message}}",
+        classes: "green rounded",
+        displayLength: 3000,
+      });
+    </script>
+    {% endfor %} {% endif %} {% block content %} {% endblock %}
+    <div style="height: 300px"></div>
+    <div class="foot">
+      <div class="container">© 2020 FitYou.com</div>
+    </div>
+  </div>
+</body>
+<script>
+  M.AutoInit();
+</script>

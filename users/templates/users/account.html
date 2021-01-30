@@ -1,0 +1,85 @@
+{% extends 'users/header.html' %} {% block content %}{% load static %}
+<div class="container">
+  <h3 style="margin-bottom: 50px">
+    Your personalized workouts and schedule is ready! All the best!!
+  </h3>
+  <p>
+    Lorem ipsum dolor sit amet consectetur adipisicing elit. Ratione, facere!
+    Itaque quae cumque recusandae temporibus magni? Perspiciatis temporibus sint
+    veniam nam porro, corporis possimus pariatur blanditiis at veritatis alias
+    adipisci? Lorem ipsum dolor sit amet consectetur adipisicing elit. Excepturi
+    culpa veritatis repudiandae? Obcaecati quaerat omnis molestias voluptas aut
+    enim provident quis expedita, quod aperiam incidunt ab aliquam totam magnam
+    officiis.
+  </p>
+  <hr />
+
+  <div class="row">
+    {% for j in l %}
+    <div class="col s4">
+      <table style="border: black 4px solid; margin-top: 0px">
+        {% for i in j %}
+        <tr style="margin-top: 0px">
+          {% ifequal i j.0 %}
+          <th style="border-right: black 2px solid; font-size: 24px">
+            {{i}} {% ifequal j.0 "Cardio" %}
+            <div></div>
+            {% else %}<br />(Reps: {{reps}} ) {% endifequal %}
+          </th>
+          {% else %}
+          <th style="border-right: black 2px solid">
+            {{i}}
+            <img
+              src="{% static 'users/image/' %}{{i}}.gif"
+              style="float: right; margin-right: 10px"
+            />
+          </th>
+          {% endifequal %}
+        </tr>
+        <br />
+        {% endfor %}
+      </table>
+    </div>
+    {% endfor %}
+  </div>
+  <table class="table" style="border: black 4px solid; margin-bottom: 20px">
+    <tr>
+      <th style="border-right: black 2px solid">
+        {{"Monday"}}
+        <hr />
+        {{workout1}}
+      </th>
+      <th style="border-right: black 2px solid">
+        {{"Tuesday"}}
+        <hr />
+        {{workout2}}
+      </th>
+      <th style="border-right: black 2px solid">
+        {{"Wednseday"}}
+        <hr />
+        {{workout3}}
+      </th>
+      <th style="border-right: black 2px solid">
+        {{"Thursday"}}
+        <hr />
+        {{workout2}}
+      </th>
+      <th style="border-right: black 2px solid">
+        {{"Friday"}}
+        <hr />
+        {{workout1}}
+      </th>
+      <th style="border-right: black 2px solid">
+        {{"Saturday"}}
+        <hr />
+        {{workout2}}
+      </th>
+      <th style="border-right: black 2px solid">
+        {{"Sunday"}}
+        <hr />
+        {{"rest"}}
+      </th>
+    </tr>
+  </table>
+</div>
+{% endblock %}
